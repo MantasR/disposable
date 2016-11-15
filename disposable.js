@@ -15,5 +15,22 @@ module.exports = {
             return isValid
         }
         callback(null, isValid)
+    },
+
+    add: function (arg) {
+        if(typeof arg === 'string') {
+            addSingle(arg);
+        } else if (arg instanceof Array) {
+            for(var i = 0; i < arg.length; i++) {
+                addSingle(arg[i]);
+            }
+        }
+    }
+}
+
+function addSingle(arg) {
+    var domain = arg.split('@').pop();
+    if(!domainMap.hasOwnProperty(domain)) {
+        domainMap[domain] = null;
     }
 }
